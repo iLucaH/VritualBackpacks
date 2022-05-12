@@ -1,0 +1,14 @@
+name: VirtualBackpacks
+version: '${project.version}'
+main: me.ilucah.virtualbackpacks.VirtualBackpacks
+api-version: 1.13
+authors: [ iLucaH ]
+description: A virtual backpack plugin for your op prison server
+depend:
+  - WorldGuard
+  - Vault
+
+commands:
+  virtualbackpacks:
+    aliases: [ vbps ]
+    description: 'Core command. Use /vbps help'

@@ -1,0 +1,25 @@
+no-permission:
+  - '&cYou do not have permission to execute this command!'
+
+player-only:
+  - '&cOnly a player can execute this command!'
+
+incorrect-usage:
+  - '&cIncorrect Usage! &7&o(( /vbps help ))'
+
+help:
+  - '&2- &a/vbps setprice <price> &7(hold the item)'
+  - '&2- &a/vbps remove &7(hold the item)'
+  - '&2- &a/vbps list &e(Lists all items and their price)'
+
+invalid-item-in-hand:
+  - '&cThe item in your hand is not valid!'
+
+invalid-number:
+  - '&cInvalid number!'
+
+price-set:
+  - '&aYou set the price of the material: {material} to {price}.'
+
+price-removed:
+  - '&bYou removed the price of the material: {material}.'

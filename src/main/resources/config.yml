@@ -1,0 +1,23 @@
+fortune: true
+
+# Only blocks broken in regions that start with this
+# will be submitted to the players backpack.
+region-name-id: 'mine'
+
+number-format: '#,###.##'
+
+autosell:
+
+  # Distance between sells in ticks.
+  period: 1200
+
+  notification:
+
+    message:
+      enabled: true
+      message:
+        - '<RAINBOW1>summary: ${amount}</RAINBOW>'
+
+    sound:
+      enabled: true
+      sound: 'BLOCK_GRAVEL_STEP'
