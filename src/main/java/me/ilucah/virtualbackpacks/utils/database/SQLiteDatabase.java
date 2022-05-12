@@ -123,7 +123,7 @@ public class SQLiteDatabase {
         }
     }
 
-    public Connection getConnection() throws SQLException {
+    public Connection getConnection() {
         return connection;
     }
 }

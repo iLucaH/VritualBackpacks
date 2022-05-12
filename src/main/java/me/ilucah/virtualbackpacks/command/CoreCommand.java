@@ -37,8 +37,8 @@ public class CoreCommand implements CommandExecutor, TabCompleter {
                 ConfigMessage.HELP.get().forEach(m -> sender.sendMessage(ColorAPI.process(m)));
                 return true;
             } else if (args[0].equalsIgnoreCase("list")) {
-                sender.sendMessage(ColorAPI.process("&b* &3Prices: &7&o(" + handler.getBackpackManager().getPriceCache().getPrices().size() + ")"));
-                handler.getBackpackManager().getPriceCache().getPrices().forEach((material, price) -> sender.sendMessage(ColorAPI.process("&9" + material.name() + ": &7$" + price + " &1(db price: &8$" + handler.getBackpackManager().getPriceCache().getDatabase().getPriceFromDB(XMaterial.matchXMaterial(material).name()) + "&1)")));
+                sender.sendMessage(ColorAPI.process("&b* &3Values: &7&o(" + handler.getBackpackManager().getPriceCache().getPrices().size() + ")"));
+                handler.getBackpackManager().getPriceCache().getPrices().forEach((material, price) -> sender.sendMessage(ColorAPI.process("&9" + material.name() + ": &7$" + price)));
                 return true;
             } else if (args[0].equalsIgnoreCase("remove")) {
                 if (!(sender instanceof Player)) {
@@ -78,7 +78,7 @@ public class CoreCommand implements CommandExecutor, TabCompleter {
                     ConfigMessage.INVALID_ITEM_IN_HAND.get().forEach(m -> sender.sendMessage(ColorAPI.process(m)));
                     return true;
                 }
-                double price = 0D;
+                double price;
                 try {
                     price = Double.valueOf(args[1]);
                 } catch (NumberFormatException exc) {
