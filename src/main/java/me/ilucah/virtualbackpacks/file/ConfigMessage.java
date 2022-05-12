@@ -14,7 +14,9 @@ public enum ConfigMessage {
     INVALID_ITEM_IN_HAND("invalid-item-in-hand"),
     INVALID_NUMBER("invalid-number"),
     PRICE_SET("price-set"),
-    PRICE_REMOVED("price-removed");
+    PRICE_REMOVED("price-removed"),
+    PLUGIN_RELOAD_SUCCESS("plugin-reload-success"),
+    PLUGIN_RELOAD_FAILURE("plugin-reload-failure");
 
     private static final ConcurrentHashMap<String, List<String>> messages = new ConcurrentHashMap<>();
 

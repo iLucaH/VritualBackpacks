@@ -36,6 +36,15 @@ public class CoreCommand implements CommandExecutor, TabCompleter {
             if (args[0].equalsIgnoreCase("help")) {
                 ConfigMessage.HELP.get().forEach(m -> sender.sendMessage(ColorAPI.process(m)));
                 return true;
+            } else if (args[0].equalsIgnoreCase("reload")) {
+                try {
+                    handler.reload();
+                    ConfigMessage.PLUGIN_RELOAD_SUCCESS.get().forEach(m -> sender.sendMessage(ColorAPI.process(m)));
+                    return true;
+                } catch (Exception e) {
+                    ConfigMessage.PLUGIN_RELOAD_FAILURE.get().forEach(m -> sender.sendMessage(ColorAPI.process(m)));
+                    return true;
+                }
             } else if (args[0].equalsIgnoreCase("list")) {
                 sender.sendMessage(ColorAPI.process("&b* &3Values: &7&o(" + handler.getBackpackManager().getPriceCache().getPrices().size() + ")"));
                 handler.getBackpackManager().getPriceCache().getPrices().forEach((material, price) -> sender.sendMessage(ColorAPI.process("&9" + material.name() + ": &7$" + price)));
@@ -101,6 +110,6 @@ public class CoreCommand implements CommandExecutor, TabCompleter {
 
     @Override
     public List<String> onTabComplete(CommandSender sender, Command command, String label, String[] args) {
-        return args.length == 1 ? Arrays.asList("list", "setprice", "help", "remove") : args.length == 2 ? args[1].contains("set") ? Arrays.asList("amount") : null : null;
+        return args.length == 1 ? Arrays.asList("list", "setprice", "help", "remove", "reload") : args.length == 2 ? args[1].equalsIgnoreCase("setprice") ? Arrays.asList("amount") : null : null;
     }
 }

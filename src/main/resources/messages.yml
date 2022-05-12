@@ -8,6 +8,7 @@ incorrect-usage:
   - '&cIncorrect Usage! &7&o(( /vbps help ))'
 
 help:
+  - '&2- &a/vbps reload'
   - '&2- &a/vbps setprice <price> &7(hold the item)'
   - '&2- &a/vbps remove &7(hold the item)'
   - '&2- &a/vbps list &e(Lists all items and their price)'
@@ -23,3 +24,9 @@ price-set:
 
 price-removed:
   - '&bYou removed the price of the material: {material}.'
+
+plugin-reload-success:
+  - '&2You reloaded the plugin successfully!'
+
+plugin-reload-failure:
+  - '&cThe plugin failed to reload! Contact your server administrator.'

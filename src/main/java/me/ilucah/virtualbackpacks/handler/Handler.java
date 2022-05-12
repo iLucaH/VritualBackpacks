@@ -48,6 +48,11 @@ public class Handler {
         return WorldGuardWrapper.getInstance().getRegions(location).stream().filter(iWrappedRegion -> iWrappedRegion.getId().toLowerCase().startsWith(settings.getRegionId())).findFirst().isPresent();
     }
 
+    public void reload() {
+        fileManager.reload();
+        settings.reloadSettings();
+    }
+
     public void registerCommands() {
         pluginInstance.getCommand("virtualbackpacks").setExecutor(new CoreCommand(this));
     }
