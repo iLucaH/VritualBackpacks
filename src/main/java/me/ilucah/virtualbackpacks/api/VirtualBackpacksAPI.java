@@ -66,4 +66,8 @@ public class VirtualBackpacksAPI {
     public void setValue(Material material, double value) {
         handler.getBackpackManager().getPriceCache().setPrice(material, value);
     }
+
+    public boolean isInMineRegion(Location location) {
+        return handler.isInRegion(location);
+    }
 }
