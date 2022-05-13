@@ -1,8 +1,8 @@
 package me.ilucah.virtualbackpacks.multiplier.booster.object;
 
+import de.tr7zw.changeme.nbtapi.NBTItem;
 import me.ilucah.virtualbackpacks.utils.colorapi.ColorAPI;
 import me.ilucah.virtualbackpacks.utils.particle.ParticleAnimator;
-import me.ilucah.virtualbackpacks.utils.xutils.NBTEditor;
 import me.ilucah.virtualbackpacks.utils.xutils.NMS;
 import me.ilucah.virtualbackpacks.utils.xutils.XMaterial;
 import me.ilucah.virtualbackpacks.utils.xutils.XSound;
@@ -44,7 +44,8 @@ public class BoosterBox {
         baseItem.setItemMeta(meta);
         if (config.getBoolean(x + "glowing"))
             baseItem.addUnsafeEnchantment(Enchantment.DURABILITY, 1);
-        NBTEditor.set(baseItem, name, "boosterbox");
+        NBTItem item = new NBTItem(baseItem, true);
+        item.setString("boosterbox", name);
         this.item = baseItem;
 
         minBoost = config.getDouble(x + "boost.min-amount");

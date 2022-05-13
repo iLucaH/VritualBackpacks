@@ -1,11 +1,11 @@
 package me.ilucah.virtualbackpacks.multiplier.booster.model;
 
+import de.tr7zw.changeme.nbtapi.NBTItem;
 import me.ilucah.virtualbackpacks.handler.Handler;
 import me.ilucah.virtualbackpacks.multiplier.booster.object.Booster;
 import me.ilucah.virtualbackpacks.multiplier.booster.object.BoosterBox;
 import me.ilucah.virtualbackpacks.settings.BoosterSettings;
 import me.ilucah.virtualbackpacks.utils.colorapi.ColorAPI;
-import me.ilucah.virtualbackpacks.utils.xutils.NBTEditor;
 import org.bukkit.configuration.file.FileConfiguration;
 import org.bukkit.entity.Player;
 import org.bukkit.inventory.ItemStack;
@@ -38,7 +38,8 @@ public class BoosterManager {
         meta.getLore().forEach(m -> lore.add(ColorAPI.process(m.replace("{multi}", String.valueOf(booster.getAmount())).replace("{duration}", String.valueOf(booster.getInitialDuration())).replace("{time_unit}", booster.getTimeUnit().name()))));
         meta.setLore(lore);
         boosterItem.setItemMeta(meta);
-        NBTEditor.set(boosterItem, booster.getAmount() + "::" + booster.getTicks(), "vbpsbooster");
+        NBTItem item = new NBTItem(boosterItem, true);
+        item.setString("vbpsbooster", booster.getAmount() + "::" + booster.getTicks());
         if (player.getInventory().firstEmpty() == -1)
             player.getWorld().dropItemNaturally(player.getLocation(), boosterItem);
         else
@@ -47,15 +48,11 @@ public class BoosterManager {
 
     public void loadBoosterBoxes() {
         FileConfiguration config = handler.getFileManager().getBoosters();
-        System.out.println("x");
         if (config.getConfigurationSection("booster-boxes").getKeys(false) == null)
             return;
-        System.out.println("xx");
         for (String string : config.getConfigurationSection("booster-boxes").getKeys(false)) {
             boosterBoxes.put(string, new BoosterBox(config, string));
-            handler.getPluginInstance().getLogger().info("Loaded booster box type: " + string);
         }
-        System.out.println("xxx");
     }
 
     public void openBoosterBox(Player player, BoosterBox boosterBox) {

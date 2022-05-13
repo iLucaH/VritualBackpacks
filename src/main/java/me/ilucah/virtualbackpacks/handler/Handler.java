@@ -3,7 +3,6 @@ package me.ilucah.virtualbackpacks.handler;
 import me.ilucah.virtualbackpacks.VirtualBackpacks;
 import me.ilucah.virtualbackpacks.autosell.AutosellTask;
 import me.ilucah.virtualbackpacks.backpack.BackpackManager;
-import me.ilucah.virtualbackpacks.command.CoreCommand;
 import me.ilucah.virtualbackpacks.command.implementation.PluginCommand;
 import me.ilucah.virtualbackpacks.file.FileManager;
 import me.ilucah.virtualbackpacks.listener.BlockBreakListener;

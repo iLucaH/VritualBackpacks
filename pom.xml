@@ -31,19 +31,25 @@
             <plugin>
                 <groupId>org.apache.maven.plugins</groupId>
                 <artifactId>maven-shade-plugin</artifactId>
-                <version>3.2.4</version>
+                <version>3.2.1</version>
                 <executions>
                     <execution>
+                        <id>shade</id>
                         <phase>package</phase>
                         <goals>
                             <goal>shade</goal>
                         </goals>
-                        <configuration>
-                            <outputFile>C:/Users/17hautrivel/Desktop/PluginOutput/server/plugins/VirtualBackpacks.jar</outputFile>
-                            <createDependencyReducedPom>false</createDependencyReducedPom>
-                        </configuration>
                     </execution>
                 </executions>
+                <configuration>
+                    <outputFile>C:/Users/17hautrivel/Desktop/PluginOutput/server/plugins/VirtualBackpacks.jar</outputFile>
+                    <relocations>
+                        <relocation>
+                            <pattern>de.tr7zw.changeme.nbtapi</pattern>
+                            <shadedPattern>me.ilucah.virtualbackpacks.utils.xutils.nbt</shadedPattern>
+                        </relocation>
+                    </relocations>
+                </configuration>
             </plugin>
         </plugins>
         <resources>
@@ -95,6 +101,11 @@
             <groupId>xyz.xenondevs</groupId>
             <artifactId>particle</artifactId>
             <version>1.7.1</version>
+        </dependency>
+        <dependency>
+            <groupId>de.tr7zw</groupId>
+            <artifactId>item-nbt-api</artifactId>
+            <version>2.9.2</version>
         </dependency>
     </dependencies>
 </project>
