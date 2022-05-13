@@ -16,7 +16,13 @@ public enum ConfigMessage {
     PRICE_SET("price-set"),
     PRICE_REMOVED("price-removed"),
     PLUGIN_RELOAD_SUCCESS("plugin-reload-success"),
-    PLUGIN_RELOAD_FAILURE("plugin-reload-failure");
+    PLUGIN_RELOAD_FAILURE("plugin-reload-failure"),
+    MULTIPLIER_VIEW("multiplier-view"),
+    MULTIPLIER_SET("multiplier-set"),
+    MULTIPLIER_ADD("multiplier-add"),
+    MULTIPLIER_REMOVE("multiplier-remove"),
+    MULTIPLIER_BOOSTER_ADD("multiplier-booster-add"),
+    INVALID_TIME_UNIT("invalid-time-unit");
 
     private static final ConcurrentHashMap<String, List<String>> messages = new ConcurrentHashMap<>();
 

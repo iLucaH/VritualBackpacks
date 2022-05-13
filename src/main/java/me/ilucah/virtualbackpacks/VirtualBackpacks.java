@@ -29,6 +29,13 @@ public class VirtualBackpacks extends JavaPlugin {
         } catch (SQLException e) {
             e.printStackTrace();
         }
+        handler.getMultiplierManager().getHandle().unloadAll();
+        try {
+            if (!handler.getMultiplierManager().getHandle().getDatabase().getConnection().isClosed())
+                handler.getMultiplierManager().getHandle().getDatabase().getConnection().close();
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
     }
 
     public Handler getHandler() {

@@ -8,13 +8,13 @@ import java.sql.*;
 import java.util.Optional;
 import java.util.concurrent.ConcurrentHashMap;
 
-public class SQLiteDatabase {
+public class MaterialDatabase {
 
     private Connection connection;
     private final String filePath;
     private String connectionName;
 
-    public SQLiteDatabase(File file) {
+    public MaterialDatabase(File file) {
         filePath = file.getAbsolutePath();
         try {
             if (this.connection != null && !this.connection.isClosed()) return;

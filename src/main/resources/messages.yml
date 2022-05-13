@@ -12,6 +12,12 @@ help:
   - '&2- &a/vbps setprice <price> &7(hold the item)'
   - '&2- &a/vbps remove &7(hold the item)'
   - '&2- &a/vbps list &e(Lists all items and their price)'
+  - ' '
+  - '&2- &a/vbps setmulti <player> <multi>'
+  - '&2- &a/vbps addmulti <player> <multi>'
+  - '&2- &a/vbps removemulti <player> <multi>'
+  - '&2- &a/vbps viewmulti <player>'
+  - '&2- &a/vbps addbooster <player> <multi> <duration> <time-unit>'
 
 invalid-item-in-hand:
   - '&cThe item in your hand is not valid!'
@@ -30,3 +36,22 @@ plugin-reload-success:
 
 plugin-reload-failure:
   - '&cThe plugin failed to reload! Contact your server administrator.'
+
+multiplier-view:
+  - '&a{player}s multiplier is: &7&o{multi}%.'
+
+multiplier-set:
+  - '&aYou set {player}s multiplier to: &7&o{multi}%'
+
+multiplier-remove:
+  - '&aYou removed {multi}% from {player}s multiplier.'
+
+multiplier-add:
+  - '&aYou added {multi}% to {player}s multiplier.'
+
+multiplier-booster-add:
+  - '&aYou added {multi}% to {player}s current booster for {duration} {time_unit}.'
+
+invalid-time-unit:
+  - '&cYou entered an invalid time unit!'
+  - '&cPlease use: &7TICKS, SECONDS, MINUTES, HOURS'

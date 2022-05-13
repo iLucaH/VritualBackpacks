@@ -24,7 +24,7 @@ public class AutosellTask extends BukkitRunnable {
         for (Player player : handler.getPluginInstance().getServer().getOnlinePlayers()) {
             if (!handler.getBackpackManager().getUserCache().hasSell(player.getUniqueId()))
                 return;
-            double sellTotal = handler.getBackpackManager().getUserCache().getUserSell(player.getUniqueId());
+            double sellTotal = handler.getBackpackManager().getUserCache().getUserSell(player.getUniqueId()) * handler.getMultiplierManager().getTotalBooster(player);
             if (sellTotal <= 0)
                 return;
             AsyncAutosellEvent event = new AsyncAutosellEvent(player, sellTotal);

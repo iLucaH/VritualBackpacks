@@ -17,10 +17,12 @@ public class PlayerConnectionListener implements Listener {
     @EventHandler
     public void onJoin(PlayerJoinEvent event) {
         handler.getBackpackManager().getUserCache().submitUser(event.getPlayer().getUniqueId());
+        handler.getMultiplierManager().getHandle().submitUser(event.getPlayer());
     }
 
     @EventHandler
     public void onLeave(PlayerQuitEvent event) {
         handler.getBackpackManager().getUserCache().withdrawUser(event.getPlayer().getUniqueId());
+        handler.getMultiplierManager().getHandle().withdrawUser(event.getPlayer());
     }
 }

@@ -21,3 +21,16 @@ autosell:
     sound:
       enabled: true
       sound: 'BLOCK_GRAVEL_STEP'
+
+booster:
+
+  # The notification sent when a players booster expires.
+  expire-notification:
+
+    message:
+      enabled: true
+      message:
+        - '<#FF0000>&lYour {multi} booster for {duration} {time_unit} has expired!'
+    sound:
+      enabled: true
+      sound: 'BLOCK_GRAVEL_STEP'

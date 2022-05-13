@@ -7,6 +7,7 @@ import me.ilucah.virtualbackpacks.command.CoreCommand;
 import me.ilucah.virtualbackpacks.file.FileManager;
 import me.ilucah.virtualbackpacks.listener.BlockBreakListener;
 import me.ilucah.virtualbackpacks.listener.PlayerConnectionListener;
+import me.ilucah.virtualbackpacks.multiplier.MultiplierManager;
 import me.ilucah.virtualbackpacks.settings.BackpackSettings;
 import org.bukkit.Location;
 import org.bukkit.event.block.BlockBreakEvent;
@@ -19,6 +20,7 @@ public class Handler {
 
     private final FileManager fileManager;
     private final BackpackManager backpackManager;
+    private final MultiplierManager multiplierManager;
 
     private final BackpackSettings settings;
 
@@ -28,6 +30,7 @@ public class Handler {
         this.pluginInstance = pluginInstance;
         this.fileManager = new FileManager(this);
         this.backpackManager = new BackpackManager(this);
+        this.multiplierManager = new MultiplierManager(this);
 
         this.settings = new BackpackSettings(this);
         registerCommands();
@@ -80,6 +83,10 @@ public class Handler {
 
     public BackpackSettings getSettings() {
         return settings;
+    }
+
+    public MultiplierManager getMultiplierManager() {
+        return multiplierManager;
     }
 
     public BukkitTask getAutosellTask() {

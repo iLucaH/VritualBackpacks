@@ -1,7 +1,7 @@
 package me.ilucah.virtualbackpacks.backpack;
 
 import me.ilucah.virtualbackpacks.handler.Handler;
-import me.ilucah.virtualbackpacks.utils.database.SQLiteDatabase;
+import me.ilucah.virtualbackpacks.utils.database.MaterialDatabase;
 import me.ilucah.virtualbackpacks.utils.xutils.XMaterial;
 import org.bukkit.Material;
 
@@ -12,10 +12,10 @@ public class MaterialPriceCache {
 
     private final ConcurrentHashMap<Material, Double> prices = new ConcurrentHashMap<>();
 
-    private final SQLiteDatabase db;
+    private final MaterialDatabase db;
 
     public MaterialPriceCache(Handler handler) {
-        db = new SQLiteDatabase(new File(handler.getPluginInstance().getDataFolder(), "data.db"));
+        db = new MaterialDatabase(new File(handler.getPluginInstance().getDataFolder(), "sellprices.db"));
     }
 
     public void setPrice(Material material, double price) {
@@ -40,7 +40,7 @@ public class MaterialPriceCache {
         db.map(prices);
     }
 
-    public SQLiteDatabase getDatabase() {
+    public MaterialDatabase getDatabase() {
         return db;
     }
 
