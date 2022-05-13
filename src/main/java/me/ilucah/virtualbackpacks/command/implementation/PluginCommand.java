@@ -14,7 +14,7 @@ public class PluginCommand extends AbstractCommand {
 
         addSubCommand(new ReloadSubCommand(handler));
         addSubCommand(new HelpSubCommand());
-        addSubCommand(new ListSubCommand(handler));
+        addSubCommand(new ListPricesSubCommand(handler));
         addSubCommand(new RemoveSubCommand(handler));
         addSubCommand(new SetPriceSubCommand(handler));
         addSubCommand(new ViewMultiSubCommand(handler));
@@ -24,6 +24,7 @@ public class PluginCommand extends AbstractCommand {
         addSubCommand(new RemoveMultiSubCommand(handler));
         addSubCommand(new GiveBoosterSubCommand(handler));
         addSubCommand(new GiveBoosterBoxSubCommand(handler));
+        addSubCommand(new ListBoosterBoxesSubCommand(handler));
     }
 
     @Override

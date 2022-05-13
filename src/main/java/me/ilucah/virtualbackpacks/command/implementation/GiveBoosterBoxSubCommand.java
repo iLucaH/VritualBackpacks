@@ -45,6 +45,8 @@ public class GiveBoosterBoxSubCommand extends SubCommand {
                     return;
                 }
             }
+            int lambdaFinalAmount = itemAmount;
+            ConfigMessage.BOOSTER_BOX_GIVE.get().forEach(m -> sender.sendMessage(ColorAPI.process(m.replace("{type}", box.get().getName()).replace("{amount}", String.valueOf(lambdaFinalAmount)).replace("{player}", player.getName()))));
             handler.getMultiplierManager().getBoosterManager().giveBoosterBox(player.getPlayer(), box.get(), itemAmount);
         } else {
             ConfigMessage.INCORRECT_USAGE.get().forEach(m -> sender.sendMessage(ColorAPI.process(m)));

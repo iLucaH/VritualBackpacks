@@ -10,6 +10,7 @@ import me.ilucah.virtualbackpacks.utils.xutils.NBTEditor;
 import org.bukkit.Material;
 import org.bukkit.event.EventHandler;
 import org.bukkit.event.Listener;
+import org.bukkit.event.block.Action;
 import org.bukkit.event.player.PlayerInteractEvent;
 
 import java.util.Optional;
@@ -24,14 +25,22 @@ public class BoosterListener implements Listener {
 
     @EventHandler
     public void onInteract(PlayerInteractEvent event) {
+        if (event.getAction() != Action.RIGHT_CLICK_BLOCK && event.getAction() != Action.RIGHT_CLICK_AIR)
+            return;
+        System.out.println("A");
         if (event.getItem() == null)
             return;
+        System.out.println("B");
         if (event.getItem().getType() == Material.AIR)
             return;
-        if (NBTEditor.contains(event.getItem(), "vbpsbooster"))
+        System.out.println("C");
+        if (NBTEditor.contains(event.getItem(), "vbpsbooster")) {
             boosterInteract(event);
-        else if (NBTEditor.contains(event.getItem(), "boosterbox"))
+            System.out.println("D");
+        } else if (NBTEditor.contains(event.getItem(), "boosterbox")) {
             boosterBoxInteract(event);
+            System.out.println("E");
+        }
     }
 
     public void boosterBoxInteract(PlayerInteractEvent event) {

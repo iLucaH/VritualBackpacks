@@ -36,6 +36,7 @@ public class BoosterSettings {
         if (config.getBoolean("item.glowing"))
             defaultItem.addUnsafeEnchantment(Enchantment.DURABILITY, 1);
         // creating the base item
+        this.baseItem = defaultItem;
     }
 
     public ItemStack getBaseItem() {

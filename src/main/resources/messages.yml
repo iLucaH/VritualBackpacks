@@ -14,13 +14,17 @@ help:
   - '&2- &a/vbps reload'
   - '&2- &a/vbps setprice <price> &7(hold the item)'
   - '&2- &a/vbps remove &7(hold the item)'
-  - '&2- &a/vbps list &e(Lists all items and their price)'
+  - '&2- &a/vbps listprices &e(Lists all items and their price)'
+  - '&2- &a/vbps listboosterboxes &e(Lists all booster boxes)'
   - ' '
   - '&2- &a/vbps setmulti <player> <multi>'
   - '&2- &a/vbps addmulti <player> <multi>'
   - '&2- &a/vbps removemulti <player> <multi>'
   - '&2- &a/vbps viewmulti <player>'
+  - ' '
   - '&2- &a/vbps addbooster <player> <multi> <duration> <time-unit>'
+  - '&2- &a/vbps givebooster <player> <multi> <duration> [amount]'
+  - '&2- &a/vbps giveboosterbox <player> <box> [amount]'
 
 invalid-item-in-hand:
   - '&cThe item in your hand is not valid!'
@@ -61,6 +65,9 @@ invalid-time-unit:
 
 mutliplier-booster-give:
   - '&aYou gave {player} a {multi}x booster with a duration of {duration} {time_unit}.'
+
+booster-box-give:
+  - '&aYou gave {player} {amount}x {type} booster boxes!'
 
 unknown-booster-box:
   - '&cThat booster box is an unknown type!'

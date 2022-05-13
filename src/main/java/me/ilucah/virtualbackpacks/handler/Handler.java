@@ -60,7 +60,6 @@ public class Handler {
     }
 
     public void registerCommands() {
-        //pluginInstance.getCommand("virtualbackpacks").setExecutor(new CoreCommand(this));
         PluginCommand command = new PluginCommand(this);
         command.register(pluginInstance);
     }

@@ -4,6 +4,7 @@ import me.ilucah.virtualbackpacks.handler.Handler;
 import me.ilucah.virtualbackpacks.multiplier.booster.object.Booster;
 import me.ilucah.virtualbackpacks.multiplier.booster.object.BoosterBox;
 import me.ilucah.virtualbackpacks.settings.BoosterSettings;
+import me.ilucah.virtualbackpacks.utils.colorapi.ColorAPI;
 import me.ilucah.virtualbackpacks.utils.xutils.NBTEditor;
 import org.bukkit.configuration.file.FileConfiguration;
 import org.bukkit.entity.Player;
@@ -26,6 +27,7 @@ public class BoosterManager {
     public BoosterManager(Handler handler) {
         this.handler = handler;
         this.settings = new BoosterSettings(handler);
+        loadBoosterBoxes();
     }
 
     public void giveBoosterItem(Player player, Booster booster, int amount) {
@@ -33,7 +35,7 @@ public class BoosterManager {
         boosterItem.setAmount(amount);
         ItemMeta meta = boosterItem.getItemMeta();
         List<String> lore = new ArrayList<>();
-        meta.getLore().forEach(m -> lore.add(m.replace("{multi}", String.valueOf(booster.getAmount())).replace("{duration}", String.valueOf(booster.getInitialDuration())).replace("{time_unit}", booster.getTimeUnit().name())));
+        meta.getLore().forEach(m -> lore.add(ColorAPI.process(m.replace("{multi}", String.valueOf(booster.getAmount())).replace("{duration}", String.valueOf(booster.getInitialDuration())).replace("{time_unit}", booster.getTimeUnit().name()))));
         meta.setLore(lore);
         boosterItem.setItemMeta(meta);
         NBTEditor.set(boosterItem, booster.getAmount() + "::" + booster.getTicks(), "vbpsbooster");
@@ -45,11 +47,15 @@ public class BoosterManager {
 
     public void loadBoosterBoxes() {
         FileConfiguration config = handler.getFileManager().getBoosters();
+        System.out.println("x");
         if (config.getConfigurationSection("booster-boxes").getKeys(false) == null)
             return;
+        System.out.println("xx");
         for (String string : config.getConfigurationSection("booster-boxes").getKeys(false)) {
             boosterBoxes.put(string, new BoosterBox(config, string));
+            handler.getPluginInstance().getLogger().info("Loaded booster box type: " + string);
         }
+        System.out.println("xxx");
     }
 
     public void openBoosterBox(Player player, BoosterBox boosterBox) {

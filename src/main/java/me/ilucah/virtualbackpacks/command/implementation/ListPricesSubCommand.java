@@ -8,12 +8,12 @@ import org.bukkit.command.CommandSender;
 
 import java.util.List;
 
-public class ListSubCommand extends SubCommand {
+public class ListPricesSubCommand extends SubCommand {
 
     private final Handler handler;
 
-    public ListSubCommand(Handler handler) {
-        super("list");
+    public ListPricesSubCommand(Handler handler) {
+        super("listprices");
         this.handler = handler;
     }
 

@@ -11,7 +11,7 @@ import java.util.List;
 public class HelpSubCommand extends SubCommand {
 
     public HelpSubCommand() {
-        super("reload");
+        super("help");
     }
 
     @Override
