@@ -1,6 +1,7 @@
-package me.ilucah.virtualbackpacks.multiplier.booster;
+package me.ilucah.virtualbackpacks.multiplier.booster.object;
 
 public enum BoosterPeriod {
+
     TICKS(1),
     SECONDS(20),
     MINUTES(1200),

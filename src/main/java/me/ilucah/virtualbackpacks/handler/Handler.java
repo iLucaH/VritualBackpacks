@@ -4,10 +4,12 @@ import me.ilucah.virtualbackpacks.VirtualBackpacks;
 import me.ilucah.virtualbackpacks.autosell.AutosellTask;
 import me.ilucah.virtualbackpacks.backpack.BackpackManager;
 import me.ilucah.virtualbackpacks.command.CoreCommand;
+import me.ilucah.virtualbackpacks.command.implementation.PluginCommand;
 import me.ilucah.virtualbackpacks.file.FileManager;
 import me.ilucah.virtualbackpacks.listener.BlockBreakListener;
+import me.ilucah.virtualbackpacks.listener.BoosterListener;
 import me.ilucah.virtualbackpacks.listener.PlayerConnectionListener;
-import me.ilucah.virtualbackpacks.multiplier.MultiplierManager;
+import me.ilucah.virtualbackpacks.multiplier.model.MultiplierManager;
 import me.ilucah.virtualbackpacks.settings.BackpackSettings;
 import org.bukkit.Location;
 import org.bukkit.event.block.BlockBreakEvent;
@@ -54,15 +56,19 @@ public class Handler {
     public void reload() {
         fileManager.reload();
         settings.reloadSettings();
+        multiplierManager.reload();
     }
 
     public void registerCommands() {
-        pluginInstance.getCommand("virtualbackpacks").setExecutor(new CoreCommand(this));
+        //pluginInstance.getCommand("virtualbackpacks").setExecutor(new CoreCommand(this));
+        PluginCommand command = new PluginCommand(this);
+        command.register(pluginInstance);
     }
 
     public void registerListeners() {
         pluginInstance.getServer().getPluginManager().registerEvents(new BlockBreakListener(this), pluginInstance);
         pluginInstance.getServer().getPluginManager().registerEvents(new PlayerConnectionListener(this), pluginInstance);
+        pluginInstance.getServer().getPluginManager().registerEvents(new BoosterListener(this), pluginInstance);
     }
 
     public BukkitTask createAutosellTask() {

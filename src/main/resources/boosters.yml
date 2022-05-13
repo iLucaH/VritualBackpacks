@@ -1,0 +1,46 @@
+item:
+  material: 'ENDER_CHEST'
+  display-name: '<RAINBOW1>&lMONEY BOOSTER</RAINBOW>'
+  display-lore:
+    - '<RAINBOW1>&l&n&m|-----------------------|</RAINBOW>'
+    - '<#FF0000>&l| <#00FF00>Multi: <#CBFFC5>{multi}<#00FF00>%'
+    - '<#FF0000>&l| <#00FF00>Duration: <#CBFFC5>{duration} {time_unit}<#00FF00>%'
+    - '<RAINBOW1>&l&n&m|-----------------------|</RAINBOW>'
+    - ' '
+    - '<#FF0000>&l| &7&o(( Right click to enable booster! ))'
+  # Minecraft limitations apply
+  glowing: true
+
+booster-boxes:
+  rare:
+    material: 'ENDER_CHEST'
+    display-name: '<GRADIENT:00FF00>&lRARE BOOSTER BOX</GRADIENT:C8FFC9>'
+    display-lore:
+      - '<GRADIENT:00FF00>&l&n&m|-----------------------|</GRADIENT:C8FFC9>'
+      - '<#00FF00>&l| &7&o(( Right click to open this booster box! ))'
+      - '<GRADIENT:00FF00>&l&n&m|-----------------------|</GRADIENT:C8FFC9>'
+    # Minecraft limitations apply
+    glowing: true
+    boost:
+      min-amount: 1.5
+      max-amount: 3.5
+    duration:
+      time-unit: 'Seconds'
+      min-amount: 5
+      max-amount: 30
+    open-actions:
+      particles:
+        enabled: true
+        particle: 'VILLAGER_HAPPY'
+      title:
+        enabled: true
+        message:
+          line1: '</RAINBOW1>You opened a booster box and received...</RAINBOW>'
+          line2: '</RAINBOW30>a {multi}x booster for {duration} {time_unit}!</RAINBOW>'
+      message:
+        enabled: true
+        message:
+          - '</RAINBOW1>You opened a booster box and received a {multi}x booster for {duration} {time_unit}!</RAINBOW>'
+      sound:
+        enabled: true
+        sound: 'BLOCK_NOTE_BLOCK_HARP'

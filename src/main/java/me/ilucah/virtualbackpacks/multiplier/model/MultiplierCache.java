@@ -1,4 +1,4 @@
-package me.ilucah.virtualbackpacks.multiplier;
+package me.ilucah.virtualbackpacks.multiplier.model;
 
 import me.ilucah.virtualbackpacks.handler.Handler;
 import me.ilucah.virtualbackpacks.utils.database.MultiplierDatabase;

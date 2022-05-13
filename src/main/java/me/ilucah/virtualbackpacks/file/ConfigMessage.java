@@ -22,7 +22,11 @@ public enum ConfigMessage {
     MULTIPLIER_ADD("multiplier-add"),
     MULTIPLIER_REMOVE("multiplier-remove"),
     MULTIPLIER_BOOSTER_ADD("multiplier-booster-add"),
-    INVALID_TIME_UNIT("invalid-time-unit");
+    INVALID_TIME_UNIT("invalid-time-unit"),
+    PLAYER_NOT_ONLINE("player-not-online"),
+    MULTIPLIER_BOOSTER_GIVE("mutliplier-booster-give"),
+    UNKNOWN_BOOSTER_BOX("unknown-booster-box"),
+    ACTIVATE_BOOSTER("activate-booster");
 
     private static final ConcurrentHashMap<String, List<String>> messages = new ConcurrentHashMap<>();
 

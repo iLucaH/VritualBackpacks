@@ -8,7 +8,7 @@ public class FileManager {
 
     private final VirtualBackpacks plugin;
 
-    private FileConfiguration config, messages;
+    private FileConfiguration config, messages, boosters;
 
     public FileManager(Handler handler) {
         this.plugin = handler.getPluginInstance();
@@ -18,6 +18,7 @@ public class FileManager {
     public void reload() {
         this.config = new YamlLoader("config", plugin).load();
         this.messages = new YamlLoader("messages", plugin).load();
+        this.boosters = new YamlLoader("boosters", plugin).load();
     }
 
     public FileConfiguration getConfig() {
@@ -26,5 +27,9 @@ public class FileManager {
 
     public FileConfiguration getMessages() {
         return messages;
+    }
+
+    public FileConfiguration getBoosters() {
+        return boosters;
     }
 }

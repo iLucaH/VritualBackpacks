@@ -2,10 +2,9 @@ package me.ilucah.virtualbackpacks.command;
 
 import me.ilucah.virtualbackpacks.file.ConfigMessage;
 import me.ilucah.virtualbackpacks.handler.Handler;
-import me.ilucah.virtualbackpacks.multiplier.booster.Booster;
-import me.ilucah.virtualbackpacks.multiplier.booster.BoosterPeriod;
+import me.ilucah.virtualbackpacks.multiplier.booster.object.Booster;
+import me.ilucah.virtualbackpacks.multiplier.booster.object.BoosterPeriod;
 import me.ilucah.virtualbackpacks.utils.colorapi.ColorAPI;
-import me.ilucah.virtualbackpacks.utils.xutils.XMaterial;
 import org.bukkit.Bukkit;
 import org.bukkit.Material;
 import org.bukkit.OfflinePlayer;

@@ -4,6 +4,9 @@ no-permission:
 player-only:
   - '&cOnly a player can execute this command!'
 
+player-not-online:
+  - '&cThe requested player is not online!'
+
 incorrect-usage:
   - '&cIncorrect Usage! &7&o(( /vbps help ))'
 
@@ -38,20 +41,29 @@ plugin-reload-failure:
   - '&cThe plugin failed to reload! Contact your server administrator.'
 
 multiplier-view:
-  - '&a{player}s multiplier is: &7&o{multi}%.'
+  - '&a{player}s multiplier is: &7&o{multi}x.'
 
 multiplier-set:
-  - '&aYou set {player}s multiplier to: &7&o{multi}%'
+  - '&aYou set {player}s multiplier to: &7&o{multi}x'
 
 multiplier-remove:
-  - '&aYou removed {multi}% from {player}s multiplier.'
+  - '&aYou removed {multi}x from {player}s multiplier.'
 
 multiplier-add:
-  - '&aYou added {multi}% to {player}s multiplier.'
+  - '&aYou added {multi}x to {player}s multiplier.'
 
 multiplier-booster-add:
-  - '&aYou added {multi}% to {player}s current booster for {duration} {time_unit}.'
+  - '&aYou added {multi}x to {player}s current booster for {duration} {time_unit}.'
 
 invalid-time-unit:
   - '&cYou entered an invalid time unit!'
   - '&cPlease use: &7TICKS, SECONDS, MINUTES, HOURS'
+
+mutliplier-booster-give:
+  - '&aYou gave {player} a {multi}x booster with a duration of {duration} {time_unit}.'
+
+unknown-booster-box:
+  - '&cThat booster box is an unknown type!'
+
+activate-booster:
+  - '<#00FF00>&l[!] &aYou activated a {multi}x booster!.'

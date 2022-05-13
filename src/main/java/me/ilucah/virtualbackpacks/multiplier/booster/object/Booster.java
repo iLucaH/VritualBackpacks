@@ -1,4 +1,4 @@
-package me.ilucah.virtualbackpacks.multiplier.booster;
+package me.ilucah.virtualbackpacks.multiplier.booster.object;
 
 import java.math.BigDecimal;
 import java.math.RoundingMode;

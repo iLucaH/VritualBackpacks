@@ -1,26 +1,27 @@
-package me.ilucah.virtualbackpacks.multiplier;
+package me.ilucah.virtualbackpacks.multiplier.model;
 
 import me.ilucah.virtualbackpacks.handler.Handler;
-import me.ilucah.virtualbackpacks.multiplier.booster.Booster;
+import me.ilucah.virtualbackpacks.multiplier.booster.object.Booster;
+import me.ilucah.virtualbackpacks.multiplier.booster.model.BoosterManager;
 import me.ilucah.virtualbackpacks.settings.MultiplierSettings;
 import me.ilucah.virtualbackpacks.utils.colorapi.ColorAPI;
 import org.bukkit.Bukkit;
 import org.bukkit.OfflinePlayer;
 import org.bukkit.entity.Player;
-import org.bukkit.scheduler.BukkitRunnable;
 
 public class MultiplierManager {
 
     private final Handler handler;
 
     private final MultiplierCache cache;
-
     private final MultiplierSettings settings;
+    private final BoosterManager boosterManager;
 
     public MultiplierManager(Handler handler) {
         this.handler = handler;
         this.cache = new MultiplierCache(handler);
         this.settings = new MultiplierSettings(handler);
+        this.boosterManager = new BoosterManager(handler);
     }
 
     public void applyBooster(Player player, Booster booster) {
@@ -69,6 +70,11 @@ public class MultiplierManager {
 
     public void reload() {
         settings.reload();
+        boosterManager.reload();
+    }
+
+    public BoosterManager getBoosterManager() {
+        return boosterManager;
     }
 
 }
