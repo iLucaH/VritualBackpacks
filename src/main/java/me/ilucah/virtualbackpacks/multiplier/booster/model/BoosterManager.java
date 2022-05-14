@@ -6,6 +6,7 @@ import me.ilucah.virtualbackpacks.multiplier.booster.object.Booster;
 import me.ilucah.virtualbackpacks.multiplier.booster.object.BoosterBox;
 import me.ilucah.virtualbackpacks.settings.BoosterSettings;
 import me.ilucah.virtualbackpacks.utils.colorapi.ColorAPI;
+import org.bukkit.Bukkit;
 import org.bukkit.configuration.file.FileConfiguration;
 import org.bukkit.entity.Player;
 import org.bukkit.inventory.ItemStack;
@@ -39,7 +40,7 @@ public class BoosterManager {
         meta.setLore(lore);
         boosterItem.setItemMeta(meta);
         NBTItem item = new NBTItem(boosterItem, true);
-        item.setString("vbpsbooster", booster.getAmount() + "::" + booster.getTicks());
+        item.setString("vbpsbooster", booster.getAmount() + "::" + booster.getInitialDuration() + "::" + booster.getTimeUnit().name());
         if (player.getInventory().firstEmpty() == -1)
             player.getWorld().dropItemNaturally(player.getLocation(), boosterItem);
         else
@@ -76,6 +77,23 @@ public class BoosterManager {
         settings.reloadSettings();
         boosterBoxes.clear();
         loadBoosterBoxes();
+    }
+
+    public BoosterSettings getSettings() {
+        return settings;
+    }
+
+    public void applyBooster(Player player, Booster booster) {
+        handler.getMultiplierManager().getHandle().addTempMulti(player, booster.getAmount());
+        Bukkit.getScheduler().scheduleAsyncDelayedTask(handler.getPluginInstance(), () -> {
+            handler.getMultiplierManager().getHandle().subtractTempMulti(player, booster.getAmount());
+            if (!player.isOnline())
+                return;
+            if (handler.getMultiplierManager().getSettings().getMessage() != null)
+                handler.getMultiplierManager().getSettings().getMessage().forEach(m -> player.sendMessage(ColorAPI.process(m.replace("{multi}", String.valueOf(booster.getAmount())).replace("{duration}", String.valueOf(booster.getInitialDuration())).replace("{time_unit}", booster.getTimeUnit().name()))));
+            if (handler.getMultiplierManager().getSettings().getSound() != null)
+                player.playSound(player.getLocation(), handler.getMultiplierManager().getSettings().getSound(), 1, 1);
+        }, booster.getTicks());
     }
 
     public Optional<BoosterBox> getBoosterBox(String name) {

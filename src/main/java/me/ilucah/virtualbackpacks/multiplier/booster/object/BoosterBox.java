@@ -26,6 +26,7 @@ public class BoosterBox {
     private final BoosterPeriod timeUnit;
 
     private ParticleEffect particle;
+    private ParticleAnimator.ParticleAnimation animation;
     private Sound sound;
     private boolean usingTitle;
     private String titleLine1, titleLine2;
@@ -33,7 +34,6 @@ public class BoosterBox {
 
     public BoosterBox(FileConfiguration config, String name) {
         this.name = name;
-
         String x = "booster-boxes." + name + ".";
         ItemStack baseItem = XMaterial.valueOf(config.getString(x + "material")).parseItem();
         ItemMeta meta = baseItem.getItemMeta();
@@ -54,13 +54,15 @@ public class BoosterBox {
         maxDuration = config.getInt(x + "duration.max-amount");
         timeUnit = BoosterPeriod.valueOf(config.getString(x + "duration.time-unit").toUpperCase());
 
-        if (config.getBoolean(x + "open-actions.particles.enabled"))
+        if (config.getBoolean(x + "open-actions.particles.enabled")) {
             particle = ParticleEffect.valueOf(config.getString(x + "open-actions.particles.particle"));
+            animation = ParticleAnimator.ParticleAnimation.valueOf(config.getString(x + "open-actions.particles.animation").toUpperCase());
+        }
         if (config.getBoolean(x + "open-actions.sound.enabled"))
             sound = XSound.valueOf(config.getString(x + "open-actions.sound.sound")).parseSound();
         if (config.getBoolean(x + "open-actions.message.enabled"))
             message = config.getStringList(x + "open-actions.message.message");
-        if (config.getBoolean(x + "open-actions.title.enabled")) {
+        if (usingTitle = config.getBoolean(x + "open-actions.title.enabled")) {
             titleLine1 = config.getString(x + "open-actions.title.message.line1");
             titleLine2 = config.getString(x + "open-actions.title.message.line2");
         }
@@ -148,9 +150,9 @@ public class BoosterBox {
         if (sound != null)
             player.playSound(player.getLocation(), sound, 1, 1);
         if (particle != null)
-            ParticleAnimator.disco(player, particle);
+            animation.playOutAnimation(player, particle);
         if (usingTitle)
-            NMS.playOutTitleEffect(player, titleLine1, titleLine2);
+            NMS.playOutTitleEffect(player, ColorAPI.process(titleLine1.replace("{multi}", String.valueOf(booster.getAmount())).replace("{duration}", String.valueOf(booster.getInitialDuration())).replace("{time_unit}", booster.getTimeUnit().name())), ColorAPI.process(titleLine2.replace("{multi}", String.valueOf(booster.getAmount())).replace("{duration}", String.valueOf(booster.getInitialDuration())).replace("{time_unit}", booster.getTimeUnit().name())));
     }
 
 }

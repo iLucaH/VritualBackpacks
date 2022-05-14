@@ -28,6 +28,8 @@ public class MultiplierManager {
         cache.addTempMulti(player, booster.getAmount());
         Bukkit.getScheduler().scheduleAsyncDelayedTask(handler.getPluginInstance(), () -> {
             cache.subtractTempMulti(player, booster.getAmount());
+            if (!player.isOnline())
+                return;
             if (settings.getMessage() != null)
                 settings.getMessage().forEach(m -> player.sendMessage(ColorAPI.process(m.replace("{multi}", String.valueOf(booster.getAmount())).replace("{duration}", String.valueOf(booster.getInitialDuration())).replace("{time_unit}", booster.getTimeUnit().name()))));
             if (settings.getSound() != null)
@@ -58,6 +60,10 @@ public class MultiplierManager {
 
     public MultiplierCache getHandle() {
         return cache;
+    }
+
+    public MultiplierSettings getSettings() {
+        return settings;
     }
 
     public double getTempBooster(Player player) {

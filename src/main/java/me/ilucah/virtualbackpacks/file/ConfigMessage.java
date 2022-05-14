@@ -26,7 +26,6 @@ public enum ConfigMessage {
     PLAYER_NOT_ONLINE("player-not-online"),
     MULTIPLIER_BOOSTER_GIVE("mutliplier-booster-give"),
     UNKNOWN_BOOSTER_BOX("unknown-booster-box"),
-    ACTIVATE_BOOSTER("activate-booster"),
     BOOSTER_BOX_GIVE("booster-box-give");
 
     private static final ConcurrentHashMap<String, List<String>> messages = new ConcurrentHashMap<>();

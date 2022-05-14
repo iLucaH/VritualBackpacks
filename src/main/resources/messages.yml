@@ -71,6 +71,3 @@ booster-box-give:
 
 unknown-booster-box:
   - '&cThat booster box is an unknown type!'
-
-activate-booster:
-  - '<#00FF00>&l[!] &aYou activated a {multi}x booster!.'

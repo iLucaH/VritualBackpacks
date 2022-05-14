@@ -1,13 +1,17 @@
 package me.ilucah.virtualbackpacks.listener;
 
 import de.tr7zw.changeme.nbtapi.NBTItem;
-import me.ilucah.virtualbackpacks.file.ConfigMessage;
 import me.ilucah.virtualbackpacks.handler.Handler;
 import me.ilucah.virtualbackpacks.multiplier.booster.object.Booster;
 import me.ilucah.virtualbackpacks.multiplier.booster.object.BoosterBox;
 import me.ilucah.virtualbackpacks.multiplier.booster.object.BoosterPeriod;
+import me.ilucah.virtualbackpacks.settings.BoosterSettings;
 import me.ilucah.virtualbackpacks.utils.colorapi.ColorAPI;
+import me.ilucah.virtualbackpacks.utils.particle.ParticleAnimator;
+import me.ilucah.virtualbackpacks.utils.xutils.NMS;
 import org.bukkit.Material;
+import org.bukkit.entity.Player;
+import org.bukkit.event.Event;
 import org.bukkit.event.EventHandler;
 import org.bukkit.event.Listener;
 import org.bukkit.event.block.Action;
@@ -26,22 +30,17 @@ public class BoosterListener implements Listener {
 
     @EventHandler
     public void onInteract(PlayerInteractEvent event) {
-        if (event.getAction() != Action.RIGHT_CLICK_AIR)
+        if (event.getAction() != Action.RIGHT_CLICK_AIR && event.getAction() != Action.RIGHT_CLICK_BLOCK)
             return;
-        System.out.println("A");
         if (event.getItem() == null)
             return;
-        System.out.println("B");
         if (event.getItem().getType() == Material.AIR)
             return;
-        System.out.println("C");
         NBTItem item = new NBTItem(event.getItem());
         if (item.hasKey("vbpsbooster")) {
             boosterInteract(event);
-            System.out.println("D");
         } else if (item.hasKey("boosterbox")) {
             boosterBoxInteract(event);
-            System.out.println("E");
         }
     }
 
@@ -54,48 +53,62 @@ public class BoosterListener implements Listener {
         NBTItem item = new NBTItem(event.getItemInHand());
         if (item.hasKey("vbpsbooster")) {
             boosterInteract(event);
-            System.out.println("D");
         } else if (item.hasKey("boosterbox")) {
             boosterBoxInteract(event);
-            System.out.println("E");
         }
     }
 
-    public void boosterBoxInteract(PlayerInteractEvent event) {
+    private void boosterBoxInteract(PlayerInteractEvent event) {
         event.setCancelled(true);
         Optional<BoosterBox> box = handler.getMultiplierManager().getBoosterManager().getBoosterBox(new NBTItem(event.getItem()).getString("boosterbox"));
         if (!box.isPresent())
             return;
         handler.getMultiplierManager().getBoosterManager().openBoosterBox(event.getPlayer(), box.get());
-        event.getItem().setType(null);
+        event.getItem().setAmount(event.getItem().getAmount() - 1);
     }
 
-    public void boosterInteract(PlayerInteractEvent event) {
+    private void boosterInteract(PlayerInteractEvent event) {
         event.setCancelled(true);
         String handle = new NBTItem(event.getItem()).getString("vbpsbooster");
         double amount = Double.valueOf(handle.split("::")[0]);
-        int tickDuration = Integer.valueOf(handle.split("::")[1]);
-        Booster booster = new Booster(amount, tickDuration, BoosterPeriod.TICKS);
+        int duration = Integer.valueOf(handle.split("::")[1]);
+        BoosterPeriod period = BoosterPeriod.valueOf(handle.split("::")[2]);
+        Booster booster = new Booster(amount, duration, period);
         handler.getMultiplierManager().applyBooster(event.getPlayer(), booster);
-        ConfigMessage.ACTIVATE_BOOSTER.get().forEach(m -> event.getPlayer().sendMessage(ColorAPI.process(m.replace("{multi}", String.valueOf(amount)))));
+        runActivationSubsidiaryActions(event.getPlayer(), amount, duration, period);
+        event.getItem().setAmount(event.getItem().getAmount() - 1);
     }
 
-    public void boosterBoxInteract(BlockPlaceEvent event) {
+    private void boosterBoxInteract(BlockPlaceEvent event) {
         event.setCancelled(true);
         Optional<BoosterBox> box = handler.getMultiplierManager().getBoosterManager().getBoosterBox(new NBTItem(event.getItemInHand()).getString("boosterbox"));
         if (!box.isPresent())
             return;
         handler.getMultiplierManager().getBoosterManager().openBoosterBox(event.getPlayer(), box.get());
-        event.getItemInHand().setType(null);
+        event.getItemInHand().setAmount(event.getItemInHand().getAmount() - 1);
     }
 
-    public void boosterInteract(BlockPlaceEvent event) {
+    private void boosterInteract(BlockPlaceEvent event) {
         event.setCancelled(true);
         String handle = new NBTItem(event.getItemInHand()).getString("vbpsbooster");
         double amount = Double.valueOf(handle.split("::")[0]);
-        int tickDuration = Integer.valueOf(handle.split("::")[1]);
-        Booster booster = new Booster(amount, tickDuration, BoosterPeriod.TICKS);
+        int duration = Integer.valueOf(handle.split("::")[1]);
+        BoosterPeriod period = BoosterPeriod.valueOf(handle.split("::")[2]);
+        Booster booster = new Booster(amount, duration, period);
         handler.getMultiplierManager().applyBooster(event.getPlayer(), booster);
-        ConfigMessage.ACTIVATE_BOOSTER.get().forEach(m -> event.getPlayer().sendMessage(ColorAPI.process(m.replace("{multi}", String.valueOf(amount)))));
+        runActivationSubsidiaryActions(event.getPlayer(), amount, duration, period);
+        event.getItemInHand().setAmount(event.getItemInHand().getAmount() - 1);
+    }
+
+    private void runActivationSubsidiaryActions(Player player, double amount, int duration, BoosterPeriod period) {
+        BoosterSettings settings = handler.getMultiplierManager().getBoosterManager().getSettings();
+        if (settings.getActivationMessage() != null)
+            settings.getActivationMessage().forEach(m -> player.sendMessage(ColorAPI.process(m.replace("{multi}", String.valueOf(amount)).replace("{duration}", String.valueOf(duration)).replace("{time_unit}", period.name()))));
+        if (settings.getActivationParticle() != null)
+            settings.getActivationParticleAnimation().playOutAnimation(player, settings.getActivationParticle());
+        if (settings.getActivationSound() != null)
+            player.playSound(player.getLocation(), settings.getActivationSound(), 1, 1);
+        if (settings.isUsingActivationTitle())
+            NMS.playOutTitleEffect(player, ColorAPI.process(settings.getActivationTitleLine1().replace("{multi}", String.valueOf(amount)).replace("{duration}", String.valueOf(duration)).replace("{time_unit}", period.name())), ColorAPI.process(settings.getActivationTitleLine2().replace("{multi}", String.valueOf(amount)).replace("{duration}", String.valueOf(duration)).replace("{time_unit}", period.name())));
     }
 }

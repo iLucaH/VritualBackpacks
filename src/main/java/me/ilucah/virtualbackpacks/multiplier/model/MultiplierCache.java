@@ -5,6 +5,8 @@ import me.ilucah.virtualbackpacks.utils.database.MultiplierDatabase;
 import org.bukkit.OfflinePlayer;
 
 import java.io.File;
+import java.math.BigDecimal;
+import java.math.RoundingMode;
 import java.util.concurrent.ConcurrentHashMap;
 
 public class MultiplierCache {
@@ -43,7 +45,7 @@ public class MultiplierCache {
     }
 
     public void addTempMulti(OfflinePlayer offlinePlayer, double multi) {
-        tempMulti.put(offlinePlayer, tempMulti.getOrDefault(offlinePlayer, 0D) + multi);
+        tempMulti.put(offlinePlayer, BigDecimal.valueOf(tempMulti.getOrDefault(offlinePlayer, 0D) + multi).setScale(1, RoundingMode.HALF_UP).doubleValue());
     }
 
     public void setTempMulti(OfflinePlayer offlinePlayer, double multi) {
