@@ -1,5 +1,14 @@
 # VritualBackpacks
 A lightweight contemporary asynchronous backpack plugin for you OP prison server.
+This plugin allows all players to earn money in an efficient way by depositing their blocks mined into a virtual bank.
+They will never see those blocks, but they will receive the money for them in periodic autosells.
+
+Features:
+- Autosells
+- Global and temporary multipliers
+   - Boosters and Booster Boxes
+- Unlimited backpack storage for all players (contemporary feature).
+- Particles, titles, sounds and rgb messages.
 
 Dependencies: WorldGuard, Vault
 
