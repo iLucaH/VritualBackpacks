@@ -23,8 +23,6 @@ public class Handler {
     private final BackpackManager backpackManager;
     private final MultiplierManager multiplierManager;
 
-    private final BackpackSettings settings;
-
     private final BukkitTask autosellTask;
 
     public Handler(VirtualBackpacks pluginInstance) {
@@ -33,7 +31,6 @@ public class Handler {
         this.backpackManager = new BackpackManager(this);
         this.multiplierManager = new MultiplierManager(this);
 
-        this.settings = new BackpackSettings(this);
         registerCommands();
         registerListeners();
 
@@ -49,12 +46,12 @@ public class Handler {
     }
 
     public boolean isInRegion(Location location) {
-        return WorldGuardWrapper.getInstance().getRegions(location).stream().filter(iWrappedRegion -> iWrappedRegion.getId().toLowerCase().startsWith(settings.getRegionId())).findFirst().isPresent();
+        return WorldGuardWrapper.getInstance().getRegions(location).stream().filter(iWrappedRegion -> iWrappedRegion.getId().toLowerCase().startsWith(backpackManager.getSettings().getRegionId())).findFirst().isPresent();
     }
 
     public void reload() {
         fileManager.reload();
-        settings.reloadSettings();
+        backpackManager.getSettings().reloadSettings();
         multiplierManager.reload();
     }
 
@@ -70,7 +67,7 @@ public class Handler {
     }
 
     public BukkitTask createAutosellTask() {
-        return new AutosellTask(this).runTaskTimerAsynchronously(pluginInstance, settings.getAutosellPeriod(), settings.getAutosellPeriod());
+        return new AutosellTask(this).runTaskTimerAsynchronously(pluginInstance, backpackManager.getSettings().getAutosellPeriod(), backpackManager.getSettings().getAutosellPeriod());
     }
 
     public FileManager getFileManager() {
@@ -83,10 +80,6 @@ public class Handler {
 
     public VirtualBackpacks getPluginInstance() {
         return pluginInstance;
-    }
-
-    public BackpackSettings getSettings() {
-        return settings;
     }
 
     public MultiplierManager getMultiplierManager() {

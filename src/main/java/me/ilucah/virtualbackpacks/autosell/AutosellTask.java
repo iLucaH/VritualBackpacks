@@ -33,10 +33,10 @@ public class AutosellTask extends BukkitRunnable {
                 return;
             econ.depositPlayer(player, event.getAmount());
             handler.getBackpackManager().getUserCache().flushSell(player.getUniqueId());
-            if (handler.getSettings().getSound() != null)
-                player.playSound(player.getLocation(), handler.getSettings().getSound(), 1, 1);
-            if (handler.getSettings().getMessage() != null)
-                handler.getSettings().getMessage().forEach(m -> player.sendMessage(ColorAPI.process(m.replace("{amount}", handler.getSettings().getFormat().format(event.getAmount())))));
+            if (handler.getBackpackManager().getSettings().getSound() != null)
+                player.playSound(player.getLocation(), handler.getBackpackManager().getSettings().getSound(), 1, 1);
+            if (handler.getBackpackManager().getSettings().getMessage() != null)
+                handler.getBackpackManager().getSettings().getMessage().forEach(m -> player.sendMessage(ColorAPI.process(m.replace("{amount}", handler.getBackpackManager().getSettings().getFormat().format(event.getAmount())))));
         }
     }
 }

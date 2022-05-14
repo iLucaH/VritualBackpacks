@@ -1,7 +1,14 @@
 package me.ilucah.virtualbackpacks.api;
 
 import me.ilucah.virtualbackpacks.VirtualBackpacks;
+import me.ilucah.virtualbackpacks.backpack.BackpackManager;
 import me.ilucah.virtualbackpacks.handler.Handler;
+import me.ilucah.virtualbackpacks.multiplier.booster.model.BoosterManager;
+import me.ilucah.virtualbackpacks.multiplier.booster.object.Booster;
+import me.ilucah.virtualbackpacks.multiplier.model.MultiplierManager;
+import me.ilucah.virtualbackpacks.settings.BackpackSettings;
+import me.ilucah.virtualbackpacks.settings.BoosterSettings;
+import me.ilucah.virtualbackpacks.settings.MultiplierSettings;
 import org.bukkit.Location;
 import org.bukkit.Material;
 import org.bukkit.block.Block;
@@ -70,4 +77,33 @@ public class VirtualBackpacksAPI {
     public boolean isInMineRegion(Location location) {
         return handler.isInRegion(location);
     }
+
+    public BackpackSettings getBackpackSettings() {
+        return handler.getBackpackManager().getSettings();
+    }
+
+    public MultiplierSettings getMultiplierSettings() {
+        return handler.getMultiplierManager().getSettings();
+    }
+
+    public BoosterSettings getBoosterSettings() {
+        return handler.getMultiplierManager().getBoosterManager().getSettings();
+    }
+
+    public MultiplierManager getMultiplierManager() {
+        return handler.getMultiplierManager();
+    }
+
+    public BackpackManager getBackpackManager() {
+        return handler.getBackpackManager();
+    }
+
+    public BoosterManager getBoosterManager() {
+        return handler.getMultiplierManager().getBoosterManager();
+    }
+
+    public void applyBooster(Player player, Booster booster) {
+        handler.getMultiplierManager().applyBooster(player, booster);
+    }
+
 }
