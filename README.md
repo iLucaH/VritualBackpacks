@@ -1,7 +1,7 @@
 # VritualBackpacks
 A lightweight contemporary asynchronous backpack plugin for you OP prison server.
 
-Dependencies: _WorldGuard_(Regions), _Vault_(Depositing money)
+Dependencies: WorldGuard, Vault
 
 Commands:
 - /virtualbackpacks (alias: /vbps) (permission: virtualbackpacks.admin) (description: core plugin command)
