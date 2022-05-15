@@ -14,7 +14,7 @@ item:
 activation-actions:
   particles:
     enabled: true
-    # Available animations: DISCO, STAR, FROST_LORD, STOMP, REEFER, RINGS.
+    # Available animations: DISCO, STAR, FROST_LORD, STOMP, REEFER, RINGS, CONE.
     animation: 'FROST_LORD'
     particle: 'SPELL_WITCH'
   title:
@@ -50,7 +50,7 @@ booster-boxes:
     open-actions:
       particles:
         enabled: true
-        # Available animations: DISCO, STAR, FROST_LORD, STOMP, REEFER, RINGS.
+        # Available animations: DISCO, STAR, FROST_LORD, STOMP, REEFER, RINGS, CONE.
         animation: 'DISCO'
         particle: 'VILLAGER_HAPPY'
       title:
